@@ -12,8 +12,15 @@ resource "docker_container" "proxy" {
     }
     
     volumes {
-        host_path      = "${path.module}/nginx.conf"
+        host_path      = abspath("${path.module}/nginx.conf")
         container_path = "/etc/nginx/nginx.conf"
+        read_only = false 
+    }
+
+    volumes {
+        host_path      =abspath ("${path.module}/nginx.conf")
+        container_path = "/usr/share/nginx/html"
+        read_only = false 
     }
     
     depends_on = [
