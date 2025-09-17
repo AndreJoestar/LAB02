@@ -1,9 +1,13 @@
-resource "docker_container" "app2" {
-  name = "app2"
-  image = mi.web.2
-  
+resource "docker_container" "nginx_app2" {
+  name = "nginx_app2"
+  image = "nginx:stable-pearl"
+
+  networks_advanced {
+    name = docker_network.app_net.name
+  }
   ports{
     internal = 80
-    external = 5002
+    external = 3002
   }
+  
 }
